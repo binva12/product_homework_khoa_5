@@ -39,7 +39,46 @@ const create = (product) => {
   return newProduct;
 };
 
+const getDetail = (id) => {
+  const index = productList.findIndex((product) => {
+    return product.id == id;
+  });
+  if (index !== -1) {
+    const product = productList[index];
+    return product;
+  } else {
+    false;
+  }
+};
+
+const update = (id, product) => {
+  const index = productList.findIndex((product) => product.id == id);
+  if (index !== -1) {
+    const oldProduct = productList[index];
+    const updatedProduct = { ...oldProduct, ...product };
+    productList[index] = updatedProduct;
+
+    return updatedProduct;
+  } else {
+    return false;
+  }
+};
+
+const deleteById = (id) => {
+  const index = productList.findIndex((product) => product.id == id);
+  if (index !== -1) {
+    const product = productList[index];
+    productList.splice(index, 1);
+    return product;
+  } else {
+    false;
+  }
+};
+
 module.exports = {
   getList,
   create,
+  getDetail,
+  update,
+  deleteById,
 };
